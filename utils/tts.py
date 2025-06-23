@@ -1,15 +1,22 @@
 # utils/tts.py
-import pyttsx3
 
-def speak_text(text):
+from gtts import gTTS
+import os
+from tempfile import NamedTemporaryFile
+from playsound import playsound
+
+def speak_text(text: str):
     try:
-        engine = pyttsx3.init()
-        engine.setProperty('rate', 170)
-        engine.setProperty('volume', 1.0)
-        engine.say(text)
-        engine.runAndWait()
+        tts = gTTS(text=text, lang='en')
+        with NamedTemporaryFile(delete=False, suffix=".mp3") as fp:
+            temp_path = fp.name
+            tts.save(temp_path)
+        playsound(temp_path)
+        os.remove(temp_path)
     except Exception as e:
-        print(f"Text-to-Speech Error: {e}")
+        print("TTS error:", e)
+
+
 
 
 

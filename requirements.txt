@@ -1,17 +1,11 @@
 streamlit
-openai
 cohere
 speechrecognition
-numpy
-soundfile
-pydub
-python-dotenv
-gTTS
-langdetect
-fastapi
-uvicorn
-aiofiles
-requests
+pyaudio
+gttsgtts
+playsound
+
+
 
 
 
