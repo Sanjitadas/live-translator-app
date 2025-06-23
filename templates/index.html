@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Translator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="centered-title">🎙️ Live Indian English → US English Translator</h2>
+
+        <div class="dropdowns">
+            <label for="input-dialect">Input Dialect:</label>
+            <select id="input-dialect" name="input_dialect">
+                <option value="indian">Indian English</option>
+                <option value="spanish">Spanish</option>
+                <option value="hindi">Hindi</option>
+            </select>
+
+            <label for="output-dialect">Output Dialect:</label>
+            <select id="output-dialect" name="output_dialect">
+                <option value="us">US English</option>
+                <option value="british">British English</option>
+                <option value="neutral">Neutral English</option>
+            </select>
+
+            <label for="mode">Mode:</label>
+            <select id="mode" name="mode">
+                <option value="stt">STT (Speech → Text)</option>
+                <option value="ttt">TTT (Text → Text)</option>
+                <option value="tts">TTS (Text → Speech)</option>
+                <option value="sts">STS (Speech → Speech)</option>
+            </select>
+        </div>
+
+        <textarea id="input-text" rows="4" placeholder="Type or speak..."></textarea>
+
+        <div class="buttons">
+            <button id="start-btn">🎤 Start Recording</button>
+            <button id="stop-btn">⏹️ Stop Recording</button>
+            <button id="translate-btn">🔁 Translate</button>
+        </div>
+
+        <div id="output-section">
+            <h3>✅ US English:</h3>
+            <textarea id="output-text" rows="4" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        // You can enhance this with JavaScript hooks to POST form inputs via Streamlit
+        // or communicate to backend endpoints
+    </script>
+</body>
+
+</html>

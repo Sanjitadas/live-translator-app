@@ -1,0 +1,10 @@
+streamlit
+openai
+cohere
+python-dotenv
+pyaudio
+whisper
+pyttsx3
+
+
+
