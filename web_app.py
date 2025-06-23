@@ -4,7 +4,6 @@ import streamlit as st
 from utils.stt import record_and_transcribe_async, stop_and_transcribe
 from utils.ai_translator import ai_translate_with_dialects
 from utils.tts import speak_text
-import time
 import os
 
 st.set_page_config(page_title="🎙️ Live Multilingual Translator", layout="centered")
@@ -45,17 +44,16 @@ mode = st.radio("🔁 Choose Mode", ["TTT (Text-to-Text)", "STT (Speech-to-Text)
 # ✍️ Input Box
 text_input = st.text_area("✍️ Type or Speak:", placeholder="You can type or record, then click Translate")
 
-# 🎤 Start Recording
+# 🎤 Upload or Record
 if mode in ["STT (Speech-to-Text)", "STS (Speech-to-Speech)"]:
-    if not st.session_state["recording"]:
-        if st.button("🎤 Start Recording"):
-            st.session_state["recording"] = True
-            record_and_transcribe_async()
-            st.success("🔴 Recording... Click '⏹️ Stop Recording' when done.")
-    else:
-        if st.button("⏹️ Stop Recording"):
-            st.session_state["recording"] = False
-            st.info("🛑 Stopped. Processing...")
+    uploaded_file = st.file_uploader("🎤 Upload a WAV audio file for transcription", type=["wav"])
+    if uploaded_file:
+        temp_path = "output/temp_live.wav"
+        with open(temp_path, "wb") as f:
+            f.write(uploaded_file.read())
+        st.success("✅ Audio file uploaded.")
+
+        if st.button("🧠 Transcribe Audio"):
             st.session_state["transcript"] = stop_and_transcribe(lang_code=input_lang)
             st.success(f"🗣️ You said:\n\n{st.session_state['transcript']}")
 
@@ -77,21 +75,13 @@ if st.button("🌐 Translate"):
             f.write(translated_text)
 
         # TTS or STS mode: speak it
-                # TTS or STS mode: speak it
         if mode in ["TTS (Text-to-Speech)", "STS (Speech-to-Speech)"]:
-            st.session_state["audio_path"] = speak_text(translated_text, lang=output_lang)
+            speak_text(translated_text)
 
-# Show Results
-if st.session_state["transcript"]:
-    st.markdown("### 🗣️ You said:")
-    st.text_area("Transcript", st.session_state["transcript"], height=100)
+        st.success(f"✅ Translated:\n\n{translated_text}")
 
-if st.session_state["translated"]:
-    st.markdown(f"### ✅ {output_lang_name} (Translated Output):")
-    st.text_area("Output", st.session_state["translated"], height=100)
 
-if st.session_state["audio_path"] and os.path.exists(st.session_state["audio_path"]):
-    st.audio(st.session_state["audio_path"], format="audio/mp3")
+
 
 
 

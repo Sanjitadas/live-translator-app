@@ -1,13 +1,10 @@
 streamlit
-cohere
 speechrecognition
 gtts
+pydub
+cohere
 python-dotenv
 
-speechrecognition
-
-
-soundfile
 
 
 
