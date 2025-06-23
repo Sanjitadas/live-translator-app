@@ -1,9 +1,9 @@
 streamlit
 cohere
 speechrecognition
-pyaudio
-gttsgtts
-playsound
+gtts
+python-dotenv
+
 
 
 
