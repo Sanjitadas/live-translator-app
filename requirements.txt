@@ -4,9 +4,10 @@ speechrecognition
 gtts
 python-dotenv
 
+speechrecognition
 
 
-
+soundfile
 
 
 
